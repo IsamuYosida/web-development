@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Дымок — персональная страница</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f4f8;
+            color: #333;
+        }
+
+        header {
+            background-color: #4a5fc1;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        main {
+            display: flex;
+            max-width: 1100px;
+            margin: 30px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        aside {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        section {
+            flex: 2;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            border-bottom: 2px solid #4a5fc1;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        img {
+            width: 220px;       /* размер картинки */
+            height: auto;
+            border-radius: 10px;
+            margin: 10px 20px 10px 0;
+            float: left;        /* переносит картинку влево */
+        }
+
+        a {
+            color: #4a5fc1;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            background: #333;
+            color: white;
+            padding: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Дымок</h1>
+    <p>Профессиональный крыс-программист и покоритель диванов</p>
+</header>
+
+<main>
+
+    <!-- Левая колонка -->
+    <aside>
+
+        <div class="card">
+            <h2>Интересы</h2>
+            <ul>
+                <li>Крысивая HTML-разметка</li>
+                <li>Вкусная еда (особенно мясо)</li>
+                <li>Всё блестящее</li>
+                <li>Бег на диване</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Деятельность</h2>
+            <ul>
+                <li>Программист крысиного кода</li>
+                <li>Скидывание предметов со стола</li>
+                <li>Модель для фотосессий</li>
+                <li>Удаление «лишних» файлов</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Не люблю</h2>
+            <ul>
+                <li>Кошек</li>
+                <li>Громкие звуки</li>
+                <li>Когда не дают вкусного</li>
+                <li>Когда не дают спать</li>
+            </ul>
+        </div>
+
+    </aside>
+
+    <!-- Правая колонка -->
+    <section class="card">
+        <img src="rat.jpeg" width="300" height="900" alt="Крысивое фото">
+        <h2>Обо мне</h2>
+
+        <p>Родился в феврале 2025 года. Полгода жил в зоомагазине, после чего был обучен быть милым и ласковым. Но это не точно</p>
+        <p>Свое имя получил случайно, но обычно отзываюсь исключительно на "крыса", потому что вредный. </p>
+        <p>Проживаю в просторной жилой площади 30×60×50 см с двумя гамаками и домиком.
+         Каждый вечер совершаю пробежки по дивану и инспектирую рабочий стол.</p>
+        <p>Недавно появился Федор, тоже вредный и слишком мелкий. Отбирает все внимание и ест вкусняшки вместо меня(</p>
+
+        <h2>Достижения</h2>
+        <ul>
+            <li>Чемпион по бегу на диване 2025</li>
+            <li>Мастер спорта по прыжкам с поверхности</li>
+            <li>Умею становиться блиночком </li>
+        </ul>
+
+        <h2>Полезная ссылка</h2>
+        <p>
+            Подробнее о домашних крысах можно узнать на сайте 
+            <a href="https://ru.wikipedia.org/wiki/%D0%94%D0%B5%D0%BA%D0%BE%D1%80%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B5_%D0%BA%D1%80%D1%8B%D1%81%D1%8B#:~:text=domestica)%20%E2%80%94%20%D0%BF%D0%BE%D0%B4%D0%B2%D0%B8%D0%B4%20%D0%B8%20%D0%BE%D0%B4%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%20%D1%84%D0%BE%D1%80%D0%BC%D0%B0,%D0%BA%D0%B0%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%B5%20%C2%AB%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D1%8B%D1%85%2D%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D1%8C%D0%BE%D0%BD%D0%BE%D0%B2%C2%BB." target="_blank">
+                Википедия — Домашняя крыса
+            </a>.
+        </p>
+        <h2> Гиперссылки для liveserver </h2>
+        <p>     <a href="2laba.html">
+                вторая лабораторная
+            </a>. 
+        </p>
+        <p> <a href="3laborat/3laba.html">
+        третья лабораторная </a> </p>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 При поддержке Крысы <br>
+</footer>
+
+</body>
+</html>

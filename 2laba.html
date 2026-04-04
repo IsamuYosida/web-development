@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма регистрации</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #4a5fc1;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #4a5fc1;
+        }
+        
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .close-btn {
+            float: right;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: inherit;
+        }
+        
+        .close-btn:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Форма регистрации</h2>
+
+    <form id="registrationForm">
+        <div class="form-group">
+            <label for="name">Имя пользователя:</label>
+            <input type="text" id="name" placeholder="Введите ваше имя">
+        </div>
+        
+        <div class="form-group">
+            <label for="age">Возраст:</label>
+            <input type="number" id="age" placeholder="Введите ваш возраст">
+        </div>
+        
+        <button type="button" id="checkBtn">Проверить</button>
+    </form>
+    
+    <div id="result">
+        <button class="close-btn" onclick="closeResult()">×</button>
+        <p id="message"></p>
+    </div>
+</div>
+
+<script>
+
+const nameInput = document.getElementById('name');
+const ageInput = document.getElementById('age');
+const checkBtn = document.getElementById('checkBtn');
+const resultDiv = document.getElementById('result');
+const messageP = document.getElementById('message');
+
+window.closeResult = function() {
+    resultDiv.style.display = 'none';
+};
+
+function showMessage(text, className) {
+
+    messageP.textContent = text;
+    resultDiv.className = className;
+    resultDiv.style.display = 'block';
+
+    // автоматическое закрытие через 3 секунды
+    setTimeout(function() {
+        resultDiv.style.display = 'none';
+    }, 3000);
+
+}
+
+checkBtn.addEventListener('click', function() {
+
+    const name = nameInput.value.trim();
+    const age = ageInput.value;
+
+    if (name === '') {
+        showMessage('Ошибка: Имя не может быть пустым', 'error');
+        return;
+    }
+
+    if (age === '' || isNaN(age) || Number(age) <= 0) {
+        showMessage('Ошибка: Введите корректный возраст (число больше 0)', 'error');
+        return;
+    }
+
+    const ageNum = Number(age);
+
+    if (ageNum < 18) {
+        showMessage('Доступ ограничен', 'error');
+    } 
+    else if (ageNum <= 65) {
+        showMessage('Доступ разрешен', 'success');
+    } 
+    else {
+        showMessage('Рекомендуется упрощенный режим', 'warning');
+    }
+
+});
+
+document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+});
+
+</script>
+
+</body>
+</html>
