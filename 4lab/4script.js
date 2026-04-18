@@ -59,7 +59,7 @@ function toggleTask(index) {
   tasks[index].done = !tasks[index].done;
   saveTasks();
   renderTasks();
-}Ы
+}
 
 // при загрузке страницы
 renderTasks();
