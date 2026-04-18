@@ -4,14 +4,14 @@ function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-function renderTasks() {
+function renderTasks() { 
   const list = document.getElementById("taskList");
   list.innerHTML = "";
 
-  tasks.forEach((task, index) => {
+  tasks.forEach((task, index) => { //для списка
     const li = document.createElement("li");
-
-    li.innerHTML = `
+//чтобы html как-то обозначал сделаное задание +кнопочки 
+    li.innerHTML = ` 
       <strong style="text-decoration: ${task.done ? 'line-through' : 'none'}">
         ${task.title}
       </strong>
@@ -25,16 +25,17 @@ function renderTasks() {
     list.appendChild(li);
   });
 }
-
-function addTask() {
+//получение текста из полей ввода
+function addTask() { 
   const title = document.getElementById("title").value.trim();
   const description = document.getElementById("description").value.trim();
 
+  //проверка на пустой заголовок
   if (!title) {
     alert("Введите название!");
     return;
   }
-
+//добавление задачи в массив (объекты новой задачи)
   tasks.push({
     title,
     description,
@@ -43,22 +44,22 @@ function addTask() {
 
   saveTasks();
   renderTasks();
-
+//очистка полей ввода 
   document.getElementById("title").value = "";
   document.getElementById("description").value = "";
 }
-
+//Функция для удаления задачи по индексу. Передаем в нее индекс задачи.
 function deleteTask(index) {
   tasks.splice(index, 1);
   saveTasks();
   renderTasks();
 }
-
+//Перекоючение задачи выполненной/не выполненной. Передаем в нее индекс задачи, смотрим на ее свойство done и меняем его на противоположное.
 function toggleTask(index) {
   tasks[index].done = !tasks[index].done;
   saveTasks();
   renderTasks();
-}
+}Ы
 
 // при загрузке страницы
 renderTasks();
