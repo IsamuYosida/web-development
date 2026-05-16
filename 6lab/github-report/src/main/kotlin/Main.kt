@@ -48,7 +48,6 @@ fun repositoriesToCsv(repositories: List<Repository>): String {
 
     val rows = repositories.joinToString("\n") { repo ->
         val language = repo.language ?: "Не указан"
-        // Убираем возможные запятые в дате, чтобы не сломать CSV
         val cleanDate = repo.lastUpdate.replace(",", " ")
         "${repo.name},${repo.stars},${repo.forks},$language,$cleanDate"
     }
@@ -76,7 +75,6 @@ fun main() {
 
         // Генерация CSV
         val csvContent = repositoriesToCsv(repos)
-
         // Сохранение в файл
         val fileName = "${username}_repositories.csv"
         File(fileName).writeText(csvContent, Charsets.UTF_8)
