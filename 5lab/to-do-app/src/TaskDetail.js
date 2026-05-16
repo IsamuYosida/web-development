@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"; //импортируем необходимые хуки для хранения данных и выполнения побочных эффектов (поиск)
 import { useParams, Link } from "react-router-dom";
 
-function TaskDetail({ tasks }) {
+function TaskDetail({ tasks }) { //компонент для отображения деталей задачи, принимает список задач из родительского компонента
   const { id } = useParams();
   const [task, setTask] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const foundInMemory = tasks.find((t) => t.id === Number(id));
+    const foundInMemory = tasks.find((t) => t.id === Number(id)); //попытка найти задачу в переданном списке задач по id, который получаем из параметров маршрута
 
     if (foundInMemory) {
       setTask(foundInMemory);
       setLoading(false);
-    } else {
+    } else { //если задача не найдена в памяти, выполняем запрос к API для получения данных о задаче по id
       fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
-        .then((res) => {
+        .then((res) => { //проверяем успешность ответа от сервера, если статус не в диапазоне 200-299, выбрасываем ошибку
           if (!res.ok) throw new Error("Задача не найдена");
           return res.json();
         })
-        .then((data) => {
+        .then((data) => { //если данные успешно получены, сохраняем их в состоянии task, добавляя пустое описание, так как API не предоставляет его, и устанавливаем loading в false
           setTask({ ...data, description: "" });
           setLoading(false);
-        })
+        }) //если возникает ошибка (например, задача не найдена), устанавливаем task в null и loading в false, чтобы отобразить сообщение об ошибке пользователю
         .catch(() => {
           setTask(null);
           setLoading(false);
         });
     }
-  }, [id, tasks]);
+  }, [id, tasks]); //useEffect нужно запустить заново, если изменится id (например, пользователь перешел с /task/1 на /task/2) или если изменится массив tasks (например, пользователь удалил задачу на главной странице).
 
-  if (loading) {
+  if (loading) { //если данные все еще загружаются, отображаем сообщение о загрузке
     return (
       <div className="card">
         <p>Загрузка...</p>
@@ -37,7 +37,7 @@ function TaskDetail({ tasks }) {
     );
   }
 
-  if (!task) {
+  if (!task) { //если задача не найдена (task равно null), отображаем сообщение об ошибке и кнопку для возврата к списку задач
     return (
       <>
         <div className="detail-header">
@@ -52,7 +52,7 @@ function TaskDetail({ tasks }) {
       </>
     );
   }
-
+//если задача успешно загружена, отображаем ее детали, включая id, название, статус выполнения и описание (если оно есть), а также кнопку для возврата к списку задач
   return (
     <>
       <div className="detail-header">

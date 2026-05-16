@@ -21,22 +21,22 @@ function App() {
   }, []);
 
   function addTask() {
-    if (!title.trim()) return;
+    if (!title.trim()) return; //нельзя добавить задачу без названия
 
     const newTask = {
-      id: Date.now(),
+      id: Date.now(), //уникальный id на основе текущего времени
       title: title,
       description: description,
-      completed: false,
+      completed: false, 
     };
 
-    setTasks([newTask, ...tasks]);
-    setTitle("");
+    setTasks([newTask, ...tasks]);  //для обновления списка задач, добавляем новую задачу в начало массива
+    setTitle(""); //очищаем поля ввода
     setDescription("");
   }
 
   function deleteTask(id) {
-    setTasks(tasks.filter((task) => task.id !== id));
+    setTasks(tasks.filter((task) => task.id !== id)); //пересоздаем массив задач, исключая удаленную задачу по id
   }
 
   function toggleTask(id) {
@@ -45,9 +45,9 @@ function App() {
         task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
-  }
+  } //создаем новый массив задач, где для задачи с совпадающим id меняем статус completed на противоположный, а для остальных оставляем без изменений
 
-  return (
+  return ( //возвращаем разметку приложения, включая маршрутизацию для главной страницы и страницы деталей задачи
     <>
       <div className="header">
         <div className="header-content">
@@ -57,9 +57,9 @@ function App() {
 
       <div className="container">
         <Routes>
-          <Route
-            path="/"
-            element={
+          <Route //определяем маршрут для главной страницы, который отображает список задач и форму для добавления новой задачи
+            path="/" //главная страница, отображающая список задач и форму для добавления новой задачи
+            element={ 
               <>
                 <div className="card">
                   <input
@@ -75,10 +75,10 @@ function App() {
                   <button onClick={addTask}>Добавить</button>
                 </div>
 
-                <div className="card">
-                  {tasks.length === 0 && <p>Загрузка задач...</p>}
-                  {tasks.map((task) => (
-                    <div key={task.id} className="task">
+                <div className="card"> 
+                  {tasks.length === 0 && <p>Загрузка задач...</p>} 
+                  {tasks.map((task) => (//для каждой задачи создаем элемент с чекбоксом, названием и кнопкой удаления, а также отображаем описание, если оно есть
+                    <div key={task.id} className="task"> 
                       <div className="task-top">
                         <div className="task-left">
                           <input
@@ -86,11 +86,11 @@ function App() {
                             checked={task.completed}
                             onChange={() => toggleTask(task.id)}
                           />
-                          <Link
+                          <Link //ссылка на страницу деталей задачи, которая отображает подробную информацию о задаче при клике на ее название
                             to={`/task/${task.id}`}
                             className="task-title-link"
                           >
-                            <span
+                            <span //название задачи, которое отображается с зачеркнутым стилем, если задача выполнена
                               className={`task-title ${
                                 task.completed ? "done" : ""
                               }`}
@@ -111,10 +111,10 @@ function App() {
                 </div>
               </>
             }
-          />
-          <Route path="/task/:id" element={<TaskDetail tasks={tasks} />} />
-        </Routes>
-      </div>
+          /> 
+          <Route path="/task/:id" element={<TaskDetail tasks={tasks} />} /> 
+        </Routes> 
+      </div> 
     </>
   );
 }
