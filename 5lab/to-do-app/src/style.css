@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f2f4f8;
+  color: #333;
+}
+
+/* ШАПКА НА ВСЮ ШИРИНУ */
+.header {
+  background-color: #4a5fc1;
+  color: white;
+  padding: 20px 0;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header-content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+/* КОНТЕЙНЕР ДЛЯ КОНТЕНТА */
+.container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+/* КАРТОЧКИ */
+.card {
+  background: white;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+button {
+  background-color: #4a5fc1;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-left: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+button:hover {
+  background-color: #3a4fb1;
+}
+
+/* ЗАДАЧА */
+.task {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.task-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.task-left input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.task-title {
+  font-weight: bold;
+}
+
+.done {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.task-desc {
+  font-size: 14px;
+  color: #555;
+  margin-top: 6px;
+  margin-left: 28px;
+}
+
+.task-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.task-title-link:hover .task-title {
+  color: #4a5fc1;
+  text-decoration: underline;
+}
+
+/* СТРАНИЦА ДЕТАЛЕЙ */
+.detail-header {
+  background-color: #4a5fc1;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.detail-header h1 {
+  margin: 0;
+  font-size: 28px;
+}

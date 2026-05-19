@@ -1,53 +1,99 @@
 // src/App.js
+
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import axios from "axios";
+
 import "./style.css";
+
 import TaskDetail from "./TaskDetail";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 
 function App() {
+
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  const API = "http://localhost:8080/todos";
+
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos?_limit=10")
-      .then((res) => res.json())
-      .then((data) => {
-        const tasksWithDesc = data.map((task) => ({
-          ...task,
-          description: "",
-        }));
-        setTasks(tasksWithDesc);
-      });
+    fetchTasks();
   }, []);
 
-  function addTask() {
+  async function fetchTasks() {
+
+    try {
+
+      const response = await axios.get(API);
+
+      setTasks(response.data);
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+  }
+
+  async function addTask() {
+
     if (!title.trim()) return;
 
-    const newTask = {
-      id: Date.now(),
-      title: title,
-      description: description,
-      completed: false,
-    };
+    try {
 
-    setTasks([newTask, ...tasks]);
-    setTitle("");
-    setDescription("");
+      await axios.post(API, {
+        title: title,
+        description: description,
+        completed: false,
+      });
+
+      fetchTasks();
+
+      setTitle("");
+      setDescription("");
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
   }
 
-  function deleteTask(id) {
-    setTasks(tasks.filter((task) => task.id !== id));
+  async function deleteTask(id) {
+
+    try {
+
+      await axios.delete(`${API}/${id}`);
+
+      fetchTasks();
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
   }
 
-  function toggleTask(id) {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
-    );
+  async function toggleTask(id) {
+
+    try {
+
+      const task = tasks.find((t) => t.id === id);
+
+      await axios.put(`${API}/${id}`, {
+        ...task,
+        completed: !task.completed,
+      });
+
+      fetchTasks();
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
   }
 
   return (
@@ -59,7 +105,9 @@ function App() {
       </div>
 
       <div className="container">
+
         <Routes>
+
           <Route
             path="/"
             element={
@@ -71,6 +119,7 @@ function App() {
                   setDescription={setDescription}
                   onAdd={addTask}
                 />
+
                 <TodoList
                   tasks={tasks}
                   onToggle={toggleTask}
@@ -79,8 +128,14 @@ function App() {
               </>
             }
           />
-          <Route path="/task/:id" element={<TaskDetail tasks={tasks} />} />
+
+          <Route
+            path="/task/:id"
+            element={<TaskDetail tasks={tasks} />}
+          />
+
         </Routes>
+
       </div>
     </>
   );
